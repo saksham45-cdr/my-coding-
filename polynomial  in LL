@@ -1,0 +1,80 @@
+Polynomials can be represented as linked list in cpp 
+rules : 1.stored in deecreasing sequence of power
+        2. No two terms have same exponent 
+        3. No coefficient is zero
+Logic : Polynomial addition :
+    while (p != NULL and q != NULL)
+
+    if p->exp == q->exp
+        add coefficients
+        create new node in result
+        move both p and q
+
+    else if p->exp > q->exp
+        copy p node to result
+        move p
+
+    else
+        copy q node to result
+        move q
+
+📌 Polynomial Multiplication (Linked List) — Pseudocode
+Assumptions:
+
+  Polynomials are stored in decreasing order of exponent
+
+  No duplicate exponents in a single list
+
+  No term with coefficient = 0
+logic :
+Input: P1, P2 (head pointers of two polynomial linked lists)
+Output: Result (head pointer of multiplied polynomial)
+
+1. If P1 is NULL or P2 is NULL
+       return NULL
+
+2. Create Result = NULL
+
+3. Set pointer p = P1
+
+4. While p is not NULL do
+
+       Set pointer q = P2
+
+       While q is not NULL do
+
+            new_coefficient = p.coefficient * q.coefficient
+            new_exponent    = p.exponent + q.exponent
+
+            InsertTerm(Result, new_coefficient, new_exponent)
+
+            q = q.next
+
+       End While
+
+       p = p.next
+
+   End While
+
+5. Return Result
+
+1. If coeff == 0
+       return
+
+2. If Result is NULL
+       create new node and make it head
+       return
+
+3. Traverse Result to find position where:
+       exponent matches exp
+       OR
+       correct sorted position
+
+4. If exponent already exists
+       add coeff to existing node
+       If coefficient becomes 0
+              delete that node
+
+5. Else
+       insert new node at proper position (maintain decreasing order)
+
