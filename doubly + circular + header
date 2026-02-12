@@ -1,0 +1,177 @@
+DOUBLY LINKED LIST :
+ Just a form of linked list that can go back and forward both with help of prev pointer 
+   #include <iostream>
+using namespace std ;
+// doubly linked list 
+struct node {
+    int data ;
+    node* next ;
+    node* prev ;
+};
+
+node*  head = NULL ;
+void pushfront (int x ){
+    node* newnode = new node ;
+    newnode -> data = x ;
+    newnode -> next =NULL;
+    newnode -> prev = NULL;
+    if (head==NULL){
+        head = newnode ;
+    }
+    else {
+        head -> prev = newnode ;
+        newnode-> next = head ;
+        head = newnode ;
+        
+        
+    }
+};
+void pushback (int x ){
+    node* newnode = new node ;
+    newnode -> data = x ;
+    newnode -> next =NULL;
+    newnode -> prev = NULL;
+    if (head==NULL){
+        head = newnode ;
+    }
+    else {
+        node* temp = head  ;
+        while (temp-> next != NULL){
+            temp=temp->next;
+        }
+        temp -> next =  newnode ;
+        newnode -> prev = temp ;
+        
+        
+    }
+    
+    
+};
+int popback (){
+    // core logic - go to last element of the linked list  then store it in variable and then make it null 
+    
+    int res  =0 ;
+    
+    node* temp = head ;
+    while(temp->next!=NULL){
+        temp = temp->next;
+    }
+    res = temp->data ;
+    // deleting the node correctly 
+    if (temp -> prev != NULL){
+        temp->prev->next =NULL;
+    }
+    else {
+        head = NULL;
+    }
+    
+    delete temp ;
+    
+};
+----------------------------------------------------------------------------------------------------------------------------------------------
+Circular linked list --> just a singly linked list whose head and tail pointers are interconnected 
+  #include <iostream>
+using namespace std ;
+// Circular linked list 
+struct node {
+    int data ;
+    node* next ;
+}
+node* head = NULL ;
+node* tail = NULL;
+
+void insertAtHead (int x ){
+    node* newnode = new node ;
+    newnode -> next = NULL ;
+    newnode-> data = x;
+    
+    if (head ==NULL){
+        head = newnode ;
+        tail = newnode ;
+        tail-> next = head ;
+    }
+    else {
+        newnode -> next = head ;
+        head = newnode ;
+        tail->next = head ;
+    }
+};
+
+void display(){
+    if (head == NULL)
+        return;
+
+    node* temp = head;
+
+    do {
+        cout << temp->data << " ";
+        temp = temp->next;
+    } 
+    while (temp != head);
+}
+
+ void insertAtTail (int x ){
+     node* newnode = new node ;
+    newnode -> next = NULL ;
+    newnode-> data = x;
+    
+    if (tail==NULL){
+        tail = newnode ;
+        head = newnode
+        newnode->next = head
+    }
+    else {
+        tail->next = newnode ;
+        newnode -> next = head ;
+        tail = newnode ;
+        
+    }
+     
+ }
+ 
+ void deleteAtHead(){
+    if (head == NULL)
+        return;
+
+    if (head == tail) {
+        delete head;
+        head = NULL;
+        tail = NULL;
+    }
+    else {
+        node* temp = head;
+        head = head->next;
+        tail->next = head;
+        delete temp;
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+Header linked list --> simple linked list, just the header of it is never empty , we initilise a header pointer that stores the count of nodes , 
+whenever a newnode is added , the header -> data is incremented .. 
+  #include <iostream> 
+using namespace std ;
+struct node {
+    int data ;
+    node* next ;
+}
+node* header = NULL ;
+void initialise (){
+    header-> data =0 ;
+    header-> next = NULL;
+}
+void insert ( int x ){
+    node* newnode = new node ;
+    newnode -> data = x ;
+    newnode -> next = NULL;
+    
+    node* temp = header ;
+    while (temp->next != NULL){
+        temp = temp-> next ;
+    }
+    temp-> next = newnode ;
+    header-> data ++ ;
+    
+}
+-------------------------------------------------------------------------------------------------------------------------------
+
+  
